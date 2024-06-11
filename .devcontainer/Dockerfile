@@ -23,21 +23,17 @@ WORKDIR /home/${CONTAINER_USER}
 
 # Install rustup
 RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- \
-    --default-toolchain none -y --profile minimal && \
-    $HOME/.cargo/bin/rustup default stable
+    --profile complete -y \
+    --target thumbv6m-none-eabi thumbv7m-none-eabi thumbv7em-none-eabi thumbv7em-none-eabihf
 
 # Update envs
 ENV PATH=${PATH}:/home/${CONTAINER_USER}/.cargo/bin
 
 RUN ARCH=$($HOME/.cargo/bin/rustup show | grep "Default host" | sed -e 's/.* //') && \
-    rustup target add thumbv6m-none-eabi && \
-    rustup target add thumbv7m-none-eabi && \
-    rustup target add thumbv7em-none-eabi && \
-    rustup target add thumbv7em-none-eabihf && \
     cargo install cargo-binutils && \
     rustup component add llvm-tools-preview && \
     cargo install cargo-generate && \
-    cargo install probe-rs-tools     
+    cargo install probe-rs-tools
 
 RUN pipx install gdbgui
 
