@@ -1,0 +1,17 @@
+[build]
+#target = "thumbv6m-none-eabi" # ARM Cortex-M0 and Cortex-M0+
+#target = "thumbv7m-none-eabi" # ARM Cortex-M3
+target = "thumbv7em-none-eabi" # ARM Cortex-M4 and Cortex-M7 (no FPU support)
+#target = "thumbv7em-none-eabihf" # ARM Cortex-M4F and Cortex-M7F (with FPU support)
+
+[target.thumbv6m-none-eabi]
+rustflags = ["-C", "link-arg=-Tlink.x"]
+
+[target.thumbv7m-none-eabi]
+rustflags = ["-C", "link-arg=-Tlink.x"]
+
+[target.thumbv7em-none-eabi]
+rustflags = ["-C", "link-arg=-Tlink.x"]
+
+[target.thumbv7em-none-eabihf]
+rustflags = ["-C", "link-arg=-Tlink.x"]
