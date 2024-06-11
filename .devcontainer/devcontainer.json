@@ -1,0 +1,53 @@
+{
+	"name": "STM32 Rust",
+	"build": {
+		"dockerfile": "Dockerfile",
+		"args": {
+			"CONTAINER_USER": "stm32",
+			"CONTAINER_GROUP": "stm32"
+		}
+	},
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	// "forwardPorts": [],
+	// Use 'postCreateCommand' to run commands after the container is created.
+	//"postCreateCommand": "scripts/setup.sh",
+	// Configure tool-specific properties.
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"rust-lang.rust-analyzer",
+				"serayuzgur.crates",
+				"tamasfe.even-better-toml",
+				"usernamehw.errorlens",
+				"vadimcn.vscode-lldb",
+				"probe-rs.probe-rs-debugger",
+				"yzhang.markdown-all-in-one",
+				"mutantdino.resourcemonitor"
+			],
+			"settings": {
+				"files.eol": "\n",
+				"editor.tabSize": 4,
+				"editor.formatOnPaste": true,
+				"editor.formatOnSave": true,
+				"editor.formatOnSaveMode": "file",
+				"editor.formatOnType": false,
+				"lldb.executable": "/usr/bin/lldb",
+				"files.watcherExclude": {
+					"**/target/**": true
+				},
+				"rust-analyzer.checkOnSave.command": "clippy",
+				"files.trimTrailingWhitespace": true,
+				"rust-analyzer.checkOnSave.allTargets": false
+			}
+		}
+	},
+	"mounts": [
+		"type=bind,source=/dev,target=/dev"
+	],
+	"forwardPorts": [
+		5000
+	],
+	"workspaceMount": "source=${localWorkspaceFolder},target=/home/stm32/workspace,type=bind,consistency=cached",
+	"workspaceFolder": "/home/stm32/workspace",
+	"remoteUser": "stm32"
+}
